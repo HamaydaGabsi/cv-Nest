@@ -4,16 +4,11 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { BaseEntity } from '../../utils/entities/BaseEntity.entity';
-import { IsEmail } from 'class-validator';
-@Entity('user')
-export class User extends BaseEntity{
+
+@Entity('skill')
+export class Skill extends BaseEntity{
   @PrimaryGeneratedColumn()
   id:number;
   @Column()
-  username:string;
-  @Column()
-  @IsEmail()
-  email:string;
-  @Column()
-  password:string
+  designation:string;
 }
