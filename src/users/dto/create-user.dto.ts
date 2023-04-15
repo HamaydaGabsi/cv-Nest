@@ -1,4 +1,6 @@
-import { IsEmail, IsNotEmpty } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional } from "class-validator";
+import { Cv } from "../../cvs/entities/cv.entity";
+import { Skill } from "../../skills/entities/skill.entity";
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -8,4 +10,5 @@ export class CreateUserDto {
   email:string;
   @IsNotEmpty()
   password:string
+  cvs: Cv[]
 }

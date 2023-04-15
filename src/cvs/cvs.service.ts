@@ -7,22 +7,26 @@ import { Cv } from './entities/cv.entity';
 
 @Injectable()
 export class CvsService {
-  constructor(
-    @InjectRepository(Cv) private cvsRepository: Repository<Cv>
-  ){}
+  constructor(@InjectRepository(Cv) private cvsRepository: Repository<Cv>) {}
 
   async create(createCvDto: CreateCvDto) {
-    console.log("inside create")
+    console.log('inside create');
     return await this.cvsRepository.save(createCvDto);
   }
 
   async findAll() {
-    return await this.cvsRepository.find();
+    return await this.cvsRepository.find({
+      relations: {
+        skills: true,
+      },
+    });
   }
 
   async findOne(id: number) {
-    const cv = await this.cvsRepository.findOneBy({ id });
-    if(!cv){
+    const cv = await this.cvsRepository.findOne(
+      { where: { id: id }, relations: ['skills'] }
+    );
+    if (!cv) {
       throw new NotFoundException(`le cv d'id ${id} n'existe pas`);
     }
     return cv;
