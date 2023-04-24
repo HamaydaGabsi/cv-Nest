@@ -16,15 +16,13 @@ export class CvsService {
 
   async findAll() {
     return await this.cvsRepository.find({
-      relations: {
-        skills: true,
-      },
+      
     });
   }
 
   async findOne(id: number) {
     const cv = await this.cvsRepository.findOne(
-      { where: { id: id }, relations: ['skills'] }
+      { where: { id: id } }
     );
     if (!cv) {
       throw new NotFoundException(`le cv d'id ${id} n'existe pas`);

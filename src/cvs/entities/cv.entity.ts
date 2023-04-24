@@ -26,7 +26,7 @@ export class Cv extends BaseEntity {
   job:string;
   @Column()
   path:string;
-  @ManyToMany(() => Skill, { cascade: true })
+  @ManyToMany(() => Skill, { cascade: true ,eager:true})
   @JoinTable()
   skills: Skill[];
   @ManyToOne(() => User, (user) => user.cvs)
